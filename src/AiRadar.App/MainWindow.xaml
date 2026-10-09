@@ -1,0 +1,90 @@
+<Window x:Class="AiRadar.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AiRadar.App.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        Title="AI Radar" Height="720" Width="1000" MinWidth="640" MinHeight="420"
+        Background="{StaticResource PageBrush}" FontFamily="Segoe UI" FontSize="14"
+        Foreground="{StaticResource InkBrush}" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="AI Radar" FontSize="26" FontWeight="Bold" />
+                <TextBlock Text="{Binding StatusText}" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,2,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="Settings" Style="{StaticResource QuietButton}" Command="{Binding ToggleSettingsCommand}" Margin="0,0,8,0" />
+                <Button Content="Check now" Style="{StaticResource PrimaryButton}" Command="{Binding CheckNowCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Settings: Product Hunt token -->
+        <Border Grid.Row="1" Margin="0,16,0,0" Padding="16" CornerRadius="8"
+                Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                Visibility="{Binding IsSettingsOpen, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel>
+                <TextBlock Text="Product Hunt token" FontWeight="SemiBold" FontSize="16" />
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}" Margin="0,4,0,10">
+                    AI Radar reads new AI launches through Product Hunt's free API. Create an application at
+                    <Hyperlink NavigateUri="https://www.producthunt.com/v2/oauth/applications" RequestNavigate="OnHyperlinkRequestNavigate">producthunt.com/v2/oauth/applications</Hyperlink>,
+                    copy its developer token and paste it here. It is stored encrypted for your Windows account only.
+                </TextBlock>
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" Content="Save" Style="{StaticResource PrimaryButton}" Click="OnSaveTokenClick" Margin="8,0,0,0" />
+                    <PasswordBox x:Name="TokenBox" Padding="6" AutomationProperties.Name="Product Hunt developer token" />
+                </DockPanel>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="2" Text="{Binding SummaryText}" Margin="0,18,0,8" FontWeight="SemiBold" />
+
+        <!-- Tool list -->
+        <Border Grid.Row="3" CornerRadius="8" Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1">
+            <ListBox x:Name="ToolList" ItemsSource="{Binding Tools}" BorderThickness="0" Background="Transparent"
+                     HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     MouseDoubleClick="OnToolDoubleClick" AutomationProperties.Name="AI tools">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:ToolRow}">
+                        <Grid Margin="6,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="15" />
+                                    <Border Background="{StaticResource GoodSoftBrush}" CornerRadius="9" Padding="7,1" Margin="8,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding IsNew, Converter={StaticResource BoolToVisibility}}">
+                                        <TextBlock Text="NEW" FontSize="10" FontWeight="Bold" Foreground="{StaticResource GoodBrush}" />
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Tagline}" TextWrapping="Wrap" Margin="0,2,0,0" />
+                                <TextBlock Text="{Binding Details}" FontSize="12" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0" />
+                            </StackPanel>
+                            <Button Grid.Column="1" Content="Open" Style="{StaticResource QuietButton}" VerticalAlignment="Center"
+                                    Command="{Binding DataContext.OpenToolCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                    CommandParameter="{Binding}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Window>
