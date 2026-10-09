@@ -13,6 +13,12 @@ public partial class MainWindow : Window
     public MainWindow(MainViewModel viewModel)
     {
         InitializeComponent();
+
+        // Keep the title bar (minimize, maximize, close) on screen on small or high-scaling displays.
+        var workArea = SystemParameters.WorkArea;
+        Width = Math.Min(Width, workArea.Width * 0.9);
+        Height = Math.Min(Height, workArea.Height * 0.9);
+
         _viewModel = viewModel;
         DataContext = viewModel;
         Loaded += OnLoaded;
