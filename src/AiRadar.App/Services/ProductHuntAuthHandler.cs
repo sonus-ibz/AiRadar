@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
+using AiRadar.Core.Sources;
 
 namespace AiRadar.App.Services;
 
@@ -8,12 +9,10 @@ public sealed class ProductHuntAuthHandler(TokenStore tokens) : DelegatingHandle
 {
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        var token = tokens.Read();
-        if (token is not null)
-        {
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        }
+        var token = tokens.Read()
+            ?? throw new ToolSourceException("Add your Product Hunt token in Settings to include Product Hunt.");
 
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         return base.SendAsync(request, cancellationToken);
     }
 }

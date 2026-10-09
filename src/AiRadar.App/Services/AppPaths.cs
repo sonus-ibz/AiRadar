@@ -10,4 +10,6 @@ public static class AppPaths
     public static string DatabaseFile => Path.Combine(DataFolder, "airadar.db");
 
     public static string TokenFile => Path.Combine(DataFolder, "producthunt.token");
+
+    public static string SettingsFile => Path.Combine(DataFolder, "settings.json");
 }

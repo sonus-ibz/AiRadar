@@ -25,6 +25,16 @@ public sealed class AiRadarDbContext(DbContextOptions<AiRadarDbContext> options)
             tool.Property(t => t.Name).HasMaxLength(300);
             tool.Property(t => t.Tagline).HasMaxLength(500);
             tool.Property(t => t.Url).HasMaxLength(2000);
+            tool.Property(t => t.NameKey).HasMaxLength(300);
+            tool.Property(t => t.UrlKey).HasMaxLength(2000);
+            tool.Property(t => t.WebsiteKey).HasMaxLength(2000);
+            tool.HasIndex(t => t.NameKey);
+            tool.HasIndex(t => t.UrlKey);
+            tool.HasIndex(t => t.WebsiteKey);
+            tool.HasOne(t => t.DuplicateOf)
+                .WithMany()
+                .HasForeignKey(t => t.DuplicateOfId)
+                .OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<SyncRun>(run =>

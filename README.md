@@ -2,15 +2,27 @@
 
 A free Windows desktop app that tracks new AI tools. Open it and it checks for AI products launched since your last visit, then keeps them in a local catalogue you can browse.
 
-> Status: Phase 1 of 5. Product Hunt is connected; more sources, "good at" categories and an installer are on the way.
+> Status: Phase 2 of 5. Four sources are connected; "good at" categories and an installer are on the way.
 
 ## What works today
 
-- Checks Product Hunt's "Artificial Intelligence" topic each time the app opens, or when you select **Check now**.
-- First run loads the last 7 days; later runs fetch only what is new since the last successful check.
-- Saves everything to a local SQLite database, so the list is there even offline.
-- Marks tools found during the current session as **NEW**.
-- Stores your Product Hunt token encrypted with Windows DPAPI, readable only by your Windows account.
+Two feeds, checked each time the app opens or when you select **Check now**:
+
+| Feed | Source | What it finds | Default minimum |
+|---|---|---|---|
+| Products | Product Hunt | Launches in the "Artificial Intelligence" topic | 20 votes |
+| Products | Hacker News | "Show HN" launches that mention AI | 10 points |
+| For developers | Hugging Face | Trending Spaces (AI demo apps) created in the last 30 days | 50 likes |
+| For developers | GitHub | Repos tagged `llm`, `ai-agents`, `generative-ai` or `ai`, created in the last 30 days | 200 stars |
+
+- Minimums are editable in Settings. Tools below them are hidden, not deleted.
+- Each check re-reads a recent window (1 day for Product Hunt, 2 for Hacker News, 30 for Hugging Face and GitHub), so scores keep updating and tools that become popular later still appear.
+- The same tool found on two sources (same website, same repo link, or same name within 30 days) shows once per feed.
+- If one source fails, the others still update and the reason is shown at the top.
+- Everything is saved to a local SQLite database, so the list is there even offline.
+- Your Product Hunt token is stored encrypted with Windows DPAPI, readable only by your Windows account. Without a token the other three sources still work.
+
+Reddit was considered but left out: its data API now needs a login, and its RSS feeds carry no vote counts to filter noise with.
 
 ## Run it
 
@@ -52,7 +64,7 @@ Each source implements `IToolSource`. `SyncService` asks each source for tools s
 ## Roadmap
 
 1. **Skeleton:** Product Hunt end to end, local catalogue, CI *(done)*
-2. **All sources:** Hacker News and Reddit (products feed); Hugging Face Spaces and GitHub (developer feed, strictly filtered)
+2. **All sources:** Hacker News (products feed); Hugging Face Spaces and GitHub (developer feed); duplicate detection; minimums in Settings *(done)*
 3. **"Good at":** categories from a local model through Ollama, with a keyword fallback
 4. **The UI:** category sidebar, search, detail panel, 12-month backfill, Windows notifications
 5. **Ship:** installer with auto-update through GitHub Releases

@@ -111,6 +111,17 @@ public sealed class ProductHuntSourceTests
         Assert.Contains("token", ex.Message, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public async Task FetchSinceAsync_RateLimited_ThrowsTryLaterMessage()
+    {
+        var (source, handler) = Create();
+        handler.RespondWithJson("""{ "errors": [ { "error": "rate_limit_reached" } ] }""", HttpStatusCode.TooManyRequests);
+
+        var ex = await Assert.ThrowsAsync<ToolSourceException>(() => source.FetchSinceAsync(Since, CancellationToken.None));
+
+        Assert.Equal("Product Hunt is limiting requests for now. It resets within 15 minutes.", ex.Message);
+    }
+
     private static JsonElement Variables(string requestBody) =>
         JsonDocument.Parse(requestBody).RootElement.GetProperty("variables");
 }

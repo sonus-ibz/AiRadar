@@ -11,7 +11,7 @@ namespace AiRadar.Core.Sources;
 public sealed class ProductHuntSource(HttpClient http) : IToolSource
 {
     public const string SourceName = "Product Hunt";
-    public const int MaxPages = 10;
+    public const int MaxPages = 25;
 
     private const string Topic = "artificial-intelligence";
     private const int PageSize = 20;
@@ -25,6 +25,9 @@ public sealed class ProductHuntSource(HttpClient http) : IToolSource
         """;
 
     public string Name => SourceName;
+
+    /// <summary>One day: votes mostly arrive on launch day, and each extra day costs API rate limit.</summary>
+    public TimeSpan RefreshWindow => TimeSpan.FromDays(1);
 
     public async Task<IReadOnlyList<DiscoveredTool>> FetchSinceAsync(DateTime sinceUtc, CancellationToken cancellationToken)
     {
@@ -60,6 +63,11 @@ public sealed class ProductHuntSource(HttpClient http) : IToolSource
         if (response.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
         {
             throw new ToolSourceException("Product Hunt rejected the API token. Check the token in Settings.");
+        }
+
+        if (response.StatusCode is HttpStatusCode.TooManyRequests)
+        {
+            throw new ToolSourceException("Product Hunt is limiting requests for now. It resets within 15 minutes.");
         }
 
         if (!response.IsSuccessStatusCode)

@@ -10,6 +10,8 @@ internal sealed class StubHttpHandler : HttpMessageHandler
 
     public List<string> RequestBodies { get; } = [];
 
+    public List<Uri> RequestUris { get; } = [];
+
     public StubHttpHandler RespondWithJson(string json, HttpStatusCode status = HttpStatusCode.OK)
     {
         _responses.Enqueue(new HttpResponseMessage(status)
@@ -21,6 +23,7 @@ internal sealed class StubHttpHandler : HttpMessageHandler
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
+        RequestUris.Add(request.RequestUri!);
         RequestBodies.Add(request.Content is null ? "" : await request.Content.ReadAsStringAsync(cancellationToken));
         return _responses.Count > 0
             ? _responses.Dequeue()

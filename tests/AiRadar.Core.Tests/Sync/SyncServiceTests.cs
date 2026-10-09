@@ -131,6 +131,90 @@ public sealed class SyncServiceTests : IDisposable
     }
 
     [Fact]
+    public async Task SyncAllAsync_RefreshWindowLongerThanGapSinceLastRun_RereadsWholeWindow()
+    {
+        var source = new FakeToolSource("A") { RefreshWindow = TimeSpan.FromDays(2) };
+        await SyncAsync(source);
+        _time.Advance(TimeSpan.FromHours(1));
+
+        await SyncAsync(source);
+
+        Assert.Equal(Now.UtcDateTime.AddHours(1) - TimeSpan.FromDays(2), source.RequestedSince[1]);
+    }
+
+    [Fact]
+    public async Task SyncAllAsync_FirstRunWithRefreshWindowLongerThanFirstRunWindow_UsesRefreshWindow()
+    {
+        var source = new FakeToolSource("A") { RefreshWindow = TimeSpan.FromDays(30) };
+
+        await SyncAsync(source);
+
+        Assert.Equal(Now.UtcDateTime - TimeSpan.FromDays(30), Assert.Single(source.RequestedSince));
+    }
+
+    [Fact]
+    public async Task SyncAllAsync_SameWebsiteAlreadyFromAnotherSource_LinksAsDuplicate()
+    {
+        var github = new FakeToolSource("GitHub");
+        github.Tools.Add(FakeToolSource.Tool("r1", name: "magpie", url: "https://github.com/yetone/magpie", website: "https://usemagpie.ai"));
+        var hackerNews = new FakeToolSource("Hacker News");
+        hackerNews.Tools.Add(FakeToolSource.Tool("h1", name: "Different title", url: "https://www.usemagpie.ai/"));
+
+        await SyncAsync(github, hackerNews);
+
+        await using var db = _database.CreateContext();
+        var original = await db.Tools.SingleAsync(t => t.Source == "GitHub");
+        var duplicate = await db.Tools.SingleAsync(t => t.Source == "Hacker News");
+        Assert.Null(original.DuplicateOfId);
+        Assert.Equal(original.Id, duplicate.DuplicateOfId);
+    }
+
+    [Fact]
+    public async Task SyncAllAsync_SameRepoLinkedFromAnotherSource_LinksAsDuplicate()
+    {
+        var github = new FakeToolSource("GitHub");
+        github.Tools.Add(FakeToolSource.Tool("r1", name: "moching", url: "https://github.com/moching-ai-dev/moching"));
+        var hackerNews = new FakeToolSource("Hacker News");
+        hackerNews.Tools.Add(FakeToolSource.Tool("h1", name: "Moching AI agent", url: "https://github.com/Moching-AI-Dev/moching"));
+
+        await SyncAsync(github, hackerNews);
+
+        await using var db = _database.CreateContext();
+        Assert.NotNull((await db.Tools.SingleAsync(t => t.Source == "Hacker News")).DuplicateOfId);
+    }
+
+    [Fact]
+    public async Task SyncAllAsync_SameNameWithin30Days_LinksAsDuplicate()
+    {
+        var productHunt = new FakeToolSource("Product Hunt");
+        productHunt.Tools.Add(FakeToolSource.Tool("p1", name: "Sketch-Loom", launchedAtUtc: new DateTime(2026, 10, 1, 0, 0, 0, DateTimeKind.Utc)));
+        var hackerNews = new FakeToolSource("Hacker News");
+        hackerNews.Tools.Add(FakeToolSource.Tool("h1", name: "sketchloom", launchedAtUtc: new DateTime(2026, 10, 7, 0, 0, 0, DateTimeKind.Utc)));
+
+        await SyncAsync(productHunt, hackerNews);
+
+        await using var db = _database.CreateContext();
+        Assert.NotNull((await db.Tools.SingleAsync(t => t.Source == "Hacker News")).DuplicateOfId);
+    }
+
+    [Theory]
+    [InlineData("Atlas", "Atlas", 60)]
+    [InlineData("Jet", "Jet", 1)]
+    [InlineData("Sketchloom", "Mosaic Chat", 1)]
+    public async Task SyncAllAsync_NamesDifferOrTooShortOrFarApart_DoesNotLink(string firstName, string secondName, int daysApart)
+    {
+        var first = new FakeToolSource("Product Hunt");
+        first.Tools.Add(FakeToolSource.Tool("p1", name: firstName, launchedAtUtc: new DateTime(2026, 8, 1, 0, 0, 0, DateTimeKind.Utc)));
+        var second = new FakeToolSource("Hacker News");
+        second.Tools.Add(FakeToolSource.Tool("h1", name: secondName, launchedAtUtc: new DateTime(2026, 8, 1, 0, 0, 0, DateTimeKind.Utc).AddDays(daysApart)));
+
+        await SyncAsync(first, second);
+
+        await using var db = _database.CreateContext();
+        Assert.Null((await db.Tools.SingleAsync(t => t.Source == "Hacker News")).DuplicateOfId);
+    }
+
+    [Fact]
     public async Task SyncAllAsync_SameToolTwiceInOneFetch_SavesItOnce()
     {
         var source = new FakeToolSource("A");

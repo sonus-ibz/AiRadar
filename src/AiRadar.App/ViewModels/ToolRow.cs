@@ -1,3 +1,5 @@
+using AiRadar.Core.Sources;
+
 namespace AiRadar.App.ViewModels;
 
 public sealed record ToolRow(
@@ -9,5 +11,20 @@ public sealed record ToolRow(
     string LaunchedText,
     bool IsNew)
 {
-    public string Details => $"{Source} · {Score:N0} votes · {LaunchedText}";
+    private static readonly Dictionary<string, string> ScoreUnits = new()
+    {
+        [ProductHuntSource.SourceName] = "vote",
+        [HackerNewsSource.SourceName] = "point",
+        [HuggingFaceSpacesSource.SourceName] = "like",
+        [GitHubSource.SourceName] = "star",
+    };
+
+    public string Details
+    {
+        get
+        {
+            var unit = ScoreUnits.GetValueOrDefault(Source, "point");
+            return $"{Source} · {Score:N0} {unit}{(Score == 1 ? "" : "s")} · {LaunchedText}";
+        }
+    }
 }

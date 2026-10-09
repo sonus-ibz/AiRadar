@@ -15,10 +15,12 @@ namespace AiRadar.App.ViewModels;
 public sealed partial class MainViewModel(
     IServiceScopeFactory scopes,
     TokenStore tokens,
+    SettingsStore settingsStore,
     TimeProvider time,
     ILogger<MainViewModel> logger) : ObservableObject
 {
     private DateTime _openedAtUtc;
+    private AppSettings _settings = new();
 
     public ObservableCollection<ToolRow> Tools { get; } = [];
 
@@ -27,11 +29,10 @@ public sealed partial class MainViewModel(
     public partial bool IsBusy { get; set; }
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(CheckNowCommand))]
-    public partial bool NeedsToken { get; set; }
+    public partial bool IsSettingsOpen { get; set; }
 
     [ObservableProperty]
-    public partial bool IsSettingsOpen { get; set; }
+    public partial bool IsDeveloperFeed { get; set; }
 
     [ObservableProperty]
     public partial string StatusText { get; set; } = "Starting…";
@@ -39,11 +40,24 @@ public sealed partial class MainViewModel(
     [ObservableProperty]
     public partial string SummaryText { get; set; } = "";
 
+    [ObservableProperty]
+    public partial int ProductHuntMinVotes { get; set; }
+
+    [ObservableProperty]
+    public partial int HackerNewsMinPoints { get; set; }
+
+    [ObservableProperty]
+    public partial int HuggingFaceMinLikes { get; set; }
+
+    [ObservableProperty]
+    public partial int GitHubMinStars { get; set; }
+
     public async Task InitializeAsync()
     {
         _openedAtUtc = time.GetUtcNow().UtcDateTime;
-        NeedsToken = !tokens.HasToken;
-        IsSettingsOpen = NeedsToken;
+        _settings = settingsStore.Load();
+        ShowSettingsValues();
+        IsSettingsOpen = !tokens.HasToken;
 
         try
         {
@@ -61,12 +75,6 @@ public sealed partial class MainViewModel(
             return;
         }
 
-        if (NeedsToken)
-        {
-            StatusText = "Add your free Product Hunt token to start checking for new AI tools.";
-            return;
-        }
-
         await CheckNowAsync();
     }
 
@@ -79,7 +87,6 @@ public sealed partial class MainViewModel(
         }
 
         tokens.Save(token);
-        NeedsToken = false;
         IsSettingsOpen = false;
         await CheckNowAsync();
     }
@@ -88,7 +95,7 @@ public sealed partial class MainViewModel(
     private async Task CheckNowAsync()
     {
         IsBusy = true;
-        StatusText = "Checking Product Hunt…";
+        StatusText = "Checking Product Hunt, Hacker News, Hugging Face and GitHub…";
         try
         {
             SyncSummary summary;
@@ -99,10 +106,10 @@ public sealed partial class MainViewModel(
 
             await LoadToolsAsync();
 
-            var checkedAt = time.GetLocalNow().ToString("HH:mm");
+            var status = $"Last check {time.GetLocalNow():HH:mm} · {summary.NewToolCount} new";
             StatusText = summary.Failures.Count == 0
-                ? $"Last check {checkedAt} · {summary.NewToolCount} new"
-                : string.Join(" ", summary.Failures.Select(f => f.Message));
+                ? status
+                : status + " · " + string.Join(" ", summary.Failures.Select(f => f.Message));
         }
         catch (Exception ex)
         {
@@ -115,10 +122,43 @@ public sealed partial class MainViewModel(
         }
     }
 
-    private bool CanCheckNow() => !IsBusy && !NeedsToken;
+    private bool CanCheckNow() => !IsBusy;
 
     [RelayCommand]
     private void ToggleSettings() => IsSettingsOpen = !IsSettingsOpen;
+
+    partial void OnIsDeveloperFeedChanged(bool value) => _ = ReloadAfterFeedChangeAsync();
+
+    private async Task ReloadAfterFeedChangeAsync()
+    {
+        try
+        {
+            await LoadToolsAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Could not load the selected feed");
+            StatusText = "Could not load this feed. Details are in the log.";
+        }
+    }
+
+    [RelayCommand]
+    private async Task SaveFiltersAsync()
+    {
+        if (ProductHuntMinVotes < 0 || HackerNewsMinPoints < 0 || HuggingFaceMinLikes < 0 || GitHubMinStars < 0)
+        {
+            StatusText = "Minimums must be 0 or more.";
+            return;
+        }
+
+        _settings.ProductHuntMinVotes = ProductHuntMinVotes;
+        _settings.HackerNewsMinPoints = HackerNewsMinPoints;
+        _settings.HuggingFaceMinLikes = HuggingFaceMinLikes;
+        _settings.GitHubMinStars = GitHubMinStars;
+        settingsStore.Save(_settings);
+        StatusText = "Filters saved.";
+        await LoadToolsAsync();
+    }
 
     [RelayCommand]
     private void OpenTool(ToolRow? tool)
@@ -133,15 +173,24 @@ public sealed partial class MainViewModel(
         Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true });
     }
 
+    private void ShowSettingsValues()
+    {
+        ProductHuntMinVotes = _settings.ProductHuntMinVotes;
+        HackerNewsMinPoints = _settings.HackerNewsMinPoints;
+        HuggingFaceMinLikes = _settings.HuggingFaceMinLikes;
+        GitHubMinStars = _settings.GitHubMinStars;
+    }
+
     private async Task LoadToolsAsync()
     {
+        var filter = IsDeveloperFeed ? _settings.DevelopersFilter() : _settings.ProductsFilter();
         IReadOnlyList<ToolListItem> items;
         int total;
         await using (var scope = scopes.CreateAsyncScope())
         {
             var catalog = scope.ServiceProvider.GetRequiredService<ToolCatalog>();
-            items = await catalog.GetLatestAsync(0, ToolCatalog.MaxPageSize, CancellationToken.None);
-            total = await catalog.CountAsync(CancellationToken.None);
+            items = await catalog.GetLatestAsync(filter, 0, ToolCatalog.MaxPageSize, CancellationToken.None);
+            total = await catalog.CountAsync(filter, CancellationToken.None);
         }
 
         var today = time.GetLocalNow().Date;
@@ -159,7 +208,7 @@ public sealed partial class MainViewModel(
         }
 
         var newCount = Tools.Count(t => t.IsNew);
-        SummaryText = $"{total:N0} tools in your catalogue · {newCount} new since you opened the app";
+        SummaryText = $"{total:N0} tools in this feed · {newCount} new since you opened the app";
     }
 
     private static string DescribeDay(DateTime day, DateTime today) => (today - day).Days switch

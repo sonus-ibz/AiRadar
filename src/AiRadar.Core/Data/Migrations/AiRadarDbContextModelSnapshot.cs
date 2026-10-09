@@ -60,6 +60,9 @@ namespace AiRadar.Core.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("DuplicateOfId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("ExternalId")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -72,6 +75,11 @@ namespace AiRadar.Core.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameKey")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
@@ -94,14 +102,40 @@ namespace AiRadar.Core.Data.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("UrlKey")
+                        .HasMaxLength(2000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WebsiteKey")
+                        .HasMaxLength(2000)
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("DuplicateOfId");
+
                     b.HasIndex("LaunchedAtUtc");
+
+                    b.HasIndex("NameKey");
+
+                    b.HasIndex("UrlKey");
+
+                    b.HasIndex("WebsiteKey");
 
                     b.HasIndex("Source", "ExternalId")
                         .IsUnique();
 
                     b.ToTable("Tools");
+                });
+
+            modelBuilder.Entity("AiRadar.Core.Tools.Tool", b =>
+                {
+                    b.HasOne("AiRadar.Core.Tools.Tool", "DuplicateOf")
+                        .WithMany()
+                        .HasForeignKey("DuplicateOfId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DuplicateOf");
                 });
 #pragma warning restore 612, 618
         }

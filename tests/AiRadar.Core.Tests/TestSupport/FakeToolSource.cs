@@ -6,6 +6,8 @@ internal sealed class FakeToolSource(string name) : IToolSource
 {
     public string Name => name;
 
+    public TimeSpan RefreshWindow { get; set; } = TimeSpan.Zero;
+
     public List<DiscoveredTool> Tools { get; } = [];
 
     public Exception? FailWith { get; set; }
@@ -20,7 +22,13 @@ internal sealed class FakeToolSource(string name) : IToolSource
             : Task.FromException<IReadOnlyList<DiscoveredTool>>(FailWith);
     }
 
-    public static DiscoveredTool Tool(string id, int score = 10, DateTime? launchedAtUtc = null) =>
-        new(id, "Tool " + id, "Tagline " + id, null, "https://example.com/" + id, score,
-            launchedAtUtc ?? new DateTime(2026, 10, 7, 6, 0, 0, DateTimeKind.Utc));
+    public static DiscoveredTool Tool(
+        string id,
+        int score = 10,
+        DateTime? launchedAtUtc = null,
+        string? name = null,
+        string? url = null,
+        string? website = null) =>
+        new(id, name ?? "Tool " + id, "Tagline " + id, null, url ?? "https://example.com/" + id, score,
+            launchedAtUtc ?? new DateTime(2026, 10, 7, 6, 0, 0, DateTimeKind.Utc), website);
 }

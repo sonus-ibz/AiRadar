@@ -48,10 +48,43 @@
                     <Button DockPanel.Dock="Right" Content="Save" Style="{StaticResource PrimaryButton}" Click="OnSaveTokenClick" Margin="8,0,0,0" />
                     <PasswordBox x:Name="TokenBox" Padding="6" AutomationProperties.Name="Product Hunt developer token" />
                 </DockPanel>
+
+                <TextBlock Text="Minimum popularity" FontWeight="SemiBold" FontSize="16" Margin="0,18,0,0" />
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}" Margin="0,4,0,10"
+                           Text="Tools below these numbers are hidden, not deleted. Lower a number to see more, raise it to see less." />
+                <WrapPanel>
+                    <WrapPanel.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Width" Value="70" />
+                            <Setter Property="Padding" Value="4" />
+                            <Setter Property="Margin" Value="6,0,24,8" />
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0,0,0,8" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <TextBlock Text="Product Hunt votes" />
+                    <TextBox Text="{Binding ProductHuntMinVotes}" AutomationProperties.Name="Minimum Product Hunt votes" />
+                    <TextBlock Text="Hacker News points" />
+                    <TextBox Text="{Binding HackerNewsMinPoints}" AutomationProperties.Name="Minimum Hacker News points" />
+                    <TextBlock Text="Hugging Face likes" />
+                    <TextBox Text="{Binding HuggingFaceMinLikes}" AutomationProperties.Name="Minimum Hugging Face likes" />
+                    <TextBlock Text="GitHub stars" />
+                    <TextBox Text="{Binding GitHubMinStars}" AutomationProperties.Name="Minimum GitHub stars" />
+                    <Button Content="Save filters" Style="{StaticResource PrimaryButton}" Command="{Binding SaveFiltersCommand}" Margin="0,0,0,8" />
+                </WrapPanel>
             </StackPanel>
         </Border>
 
-        <TextBlock Grid.Row="2" Text="{Binding SummaryText}" Margin="0,18,0,8" FontWeight="SemiBold" />
+        <DockPanel Grid.Row="2" Margin="0,18,0,8">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="0,0,16,0">
+                <RadioButton Content="Products" Style="{StaticResource FeedTab}" IsChecked="True" />
+                <RadioButton Content="For developers" Style="{StaticResource FeedTab}" Margin="6,0,0,0"
+                             IsChecked="{Binding IsDeveloperFeed, Mode=TwoWay}" />
+            </StackPanel>
+            <TextBlock Text="{Binding SummaryText}" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" />
+        </DockPanel>
 
         <!-- Tool list -->
         <Border Grid.Row="3" CornerRadius="8" Background="{StaticResource SurfaceBrush}"
