@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using AiRadar.Core.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,47 +18,45 @@ public sealed class ToolCatalog(AiRadarDbContext db)
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(take);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(take, MaxPageSize);
 
-        return await Filtered(filter)
+        return await db.Tools
+            .AsNoTracking()
+            .Visible(filter)
             .OrderByDescending(t => t.LaunchedAtUtc)
             .ThenByDescending(t => t.Id)
             .Skip(skip)
             .Take(take)
-            .Select(t => new ToolListItem(t.Name, t.Tagline, t.Url, t.Source, t.Score, t.LaunchedAtUtc, t.FirstSeenAtUtc))
+            .Select(t => new ToolListItem(
+                t.Name, t.Tagline, t.Url, t.Source, t.Score, t.LaunchedAtUtc, t.FirstSeenAtUtc, t.PrimaryCategory, t.SecondaryCategory))
             .ToListAsync(cancellationToken);
     }
 
     public Task<int> CountAsync(ToolFilter filter, CancellationToken cancellationToken) =>
-        Filtered(filter).CountAsync(cancellationToken);
+        db.Tools.AsNoTracking().Visible(filter).CountAsync(cancellationToken);
 
-    private IQueryable<Tool> Filtered(ToolFilter filter)
+    /// <summary>How many visible tools are good at each category; a tool counts once for each of its two categories.</summary>
+    public async Task<IReadOnlyDictionary<string, int>> CountByCategoryAsync(ToolFilter filter, CancellationToken cancellationToken)
     {
-        var sources = filter.MinScoreBySource.Keys.ToList();
+        var visible = db.Tools.AsNoTracking().Visible(filter with { Category = null });
 
-        // A tool also found earlier on another source in the same view shows once, under that source.
-        return db.Tools
-            .AsNoTracking()
-            .Where(MeetsMinimumScore(filter))
-            .Where(t => t.DuplicateOfId == null || !sources.Contains(t.DuplicateOf!.Source));
-    }
+        var primary = await visible
+            .Where(t => t.PrimaryCategory != null)
+            .GroupBy(t => t.PrimaryCategory!)
+            .Select(g => new { Category = g.Key, Count = g.Count() })
+            .ToListAsync(cancellationToken);
+        var secondary = await visible
+            .Where(t => t.SecondaryCategory != null)
+            .GroupBy(t => t.SecondaryCategory!)
+            .Select(g => new { Category = g.Key, Count = g.Count() })
+            .ToListAsync(cancellationToken);
 
-    private static Expression<Func<Tool, bool>> MeetsMinimumScore(ToolFilter filter)
-    {
-        var tool = Expression.Parameter(typeof(Tool), "t");
-        Expression body = Expression.Constant(false);
-
-        foreach (var (source, minimum) in filter.MinScoreBySource)
-        {
-            var sourceMatches = Expression.Equal(Expression.Property(tool, nameof(Tool.Source)), Expression.Constant(source));
-            var scoreHighEnough = Expression.GreaterThanOrEqual(Expression.Property(tool, nameof(Tool.Score)), Expression.Constant(minimum));
-            body = Expression.OrElse(body, Expression.AndAlso(sourceMatches, scoreHighEnough));
-        }
-
-        return Expression.Lambda<Func<Tool, bool>>(body, tool);
+        return primary.Concat(secondary)
+            .GroupBy(c => c.Category)
+            .ToDictionary(g => g.Key, g => g.Sum(c => c.Count));
     }
 }
 
-/// <summary>The sources to show, each with the minimum score a tool needs to appear.</summary>
-public sealed record ToolFilter(IReadOnlyDictionary<string, int> MinScoreBySource);
+/// <summary>The sources to show, each with the minimum score a tool needs to appear, and optionally one category.</summary>
+public sealed record ToolFilter(IReadOnlyDictionary<string, int> MinScoreBySource, string? Category = null);
 
 public sealed record ToolListItem(
     string Name,
@@ -68,4 +65,6 @@ public sealed record ToolListItem(
     string Source,
     int Score,
     DateTime LaunchedAtUtc,
-    DateTime FirstSeenAtUtc);
+    DateTime FirstSeenAtUtc,
+    string? PrimaryCategory,
+    string? SecondaryCategory);

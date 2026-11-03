@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/eval/">
+    <Project Path="eval/AiRadar.Eval/AiRadar.Eval.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/AiRadar.App/AiRadar.App.csproj" />
     <Project Path="src/AiRadar.Core/AiRadar.Core.csproj" />

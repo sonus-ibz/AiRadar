@@ -31,6 +31,11 @@ public sealed class AiRadarDbContext(DbContextOptions<AiRadarDbContext> options)
             tool.HasIndex(t => t.NameKey);
             tool.HasIndex(t => t.UrlKey);
             tool.HasIndex(t => t.WebsiteKey);
+            tool.Property(t => t.PrimaryCategory).HasMaxLength(50);
+            tool.Property(t => t.SecondaryCategory).HasMaxLength(50);
+            tool.Property(t => t.CategoryMethod).HasConversion<string>().HasMaxLength(30);
+            tool.HasIndex(t => t.PrimaryCategory);
+            tool.HasIndex(t => t.SecondaryCategory);
             tool.HasOne(t => t.DuplicateOf)
                 .WithMany()
                 .HasForeignKey(t => t.DuplicateOfId)

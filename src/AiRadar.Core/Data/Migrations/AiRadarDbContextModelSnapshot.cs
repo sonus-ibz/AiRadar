@@ -57,6 +57,10 @@ namespace AiRadar.Core.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CategoryMethod")
+                        .HasMaxLength(30)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -84,8 +88,16 @@ namespace AiRadar.Core.Data.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PrimaryCategory")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Score")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecondaryCategory")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Source")
                         .IsRequired()
@@ -117,6 +129,10 @@ namespace AiRadar.Core.Data.Migrations
                     b.HasIndex("LaunchedAtUtc");
 
                     b.HasIndex("NameKey");
+
+                    b.HasIndex("PrimaryCategory");
+
+                    b.HasIndex("SecondaryCategory");
 
                     b.HasIndex("UrlKey");
 

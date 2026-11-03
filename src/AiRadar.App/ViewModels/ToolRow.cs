@@ -9,7 +9,8 @@ public sealed record ToolRow(
     string Source,
     int Score,
     string LaunchedText,
-    bool IsNew)
+    bool IsNew,
+    IReadOnlyList<string> Categories)
 {
     private static readonly Dictionary<string, string> ScoreUnits = new()
     {

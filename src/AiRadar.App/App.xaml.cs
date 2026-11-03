@@ -2,13 +2,16 @@ using System.IO;
 using System.Windows;
 using AiRadar.App.Services;
 using AiRadar.App.ViewModels;
+using AiRadar.Core.Categories;
 using AiRadar.Core.Data;
 using AiRadar.Core.Sources;
 using AiRadar.Core.Sync;
 using AiRadar.Core.Tools;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OllamaSharp;
 
 namespace AiRadar.App;
 
@@ -48,7 +51,16 @@ public partial class App : Application
                 services.AddTransient<IToolSource>(sp => sp.GetRequiredService<HuggingFaceSpacesSource>());
                 services.AddTransient<IToolSource>(sp => sp.GetRequiredService<GitHubSource>());
 
+                services.AddHttpClient<LocalAi>(client =>
+                {
+                    client.BaseAddress = new Uri(LocalAi.BaseAddress);
+                    client.Timeout = TimeSpan.FromSeconds(3);
+                });
+                services.AddSingleton<IChatClient>(_ => new OllamaApiClient(new Uri(LocalAi.BaseAddress), LocalAi.Model));
+                services.AddSingleton<AiCategoryClassifier>();
+
                 services.AddScoped<SyncService>();
+                services.AddScoped<CategorizationService>();
                 services.AddScoped<ToolCatalog>();
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<MainWindow>();
@@ -69,6 +81,7 @@ public partial class App : Application
 
     protected override void OnExit(ExitEventArgs e)
     {
+        _host?.Services.GetRequiredService<MainViewModel>().StopBackgroundWork();
         _host?.Dispose();
         base.OnExit(e);
     }

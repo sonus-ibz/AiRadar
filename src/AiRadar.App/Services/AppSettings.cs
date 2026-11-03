@@ -13,6 +13,11 @@ public sealed class AppSettings
     public int HuggingFaceMinLikes { get; set; } = 50;
     public int GitHubMinStars { get; set; } = 200;
 
+    /// <summary>
+    /// Off by default: on the 95-tool accuracy test, llama3.2:3b sorted fewer tools right than the keyword rules.
+    /// </summary>
+    public bool UseLocalAi { get; set; }
+
     public ToolFilter ProductsFilter() => new(new Dictionary<string, int>
     {
         [ProductHuntSource.SourceName] = ProductHuntMinVotes,

@@ -1,0 +1,910 @@
+[
+  {
+    "source": "GitHub",
+    "name": "jev-chat-jarvis",
+    "tagline": "The chat decision assistant: before you reply, Jev reads the chat, judges intent and risk, and drafts replies you fill in with one tap. You press send. Android · Windows · macOS · iOS | 聊天辅助决策工具：先看懂对方再回复，发不发由你。",
+    "description": "The chat decision assistant: before you reply, Jev reads the chat, judges intent and risk, and drafts replies you fill in with one tap. You press send. Android · Windows · macOS · iOS | 聊天辅助决策工具：先看懂对方再回复，发不发由你。",
+    "expected": "Chat & assistants",
+    "alsoOk": [
+      "Writing"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "magpie",
+    "tagline": "Every agent's model. One place. Codex on DeepSeek, Claude Code on Kimi, from the menu bar.",
+    "description": "Every agent's model. One place. Codex on DeepSeek, Claude Code on Kimi, from the menu bar.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "AIHOT",
+    "tagline": "一个自己找热点、自己写日报的网站框架。把信源和精选标准换成你的，它就是你的行业热点站。",
+    "description": "一个自己找热点、自己写日报的网站框架。把信源和精选标准换成你的，它就是你的行业热点站。",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Writing"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "dsh-our-free-model",
+    "tagline": "在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 DeepSeek V4.1 Flash、Kimi K3 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier models are just there, DeepSeek V4.1 Flash and Kimi K3 among them. Completely free, with no usage cap.",
+    "description": "在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 DeepSeek V4.1 Flash、Kimi K3 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier models are just there, DeepSeek V4.1 Flash and Kimi K3 among them. Completely free, with no usage cap.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Chat & assistants",
+      "Other"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "answer-me-with-html",
+    "tagline": "Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。",
+    "description": "Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Agents & automation",
+      "Chat & assistants"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-jev",
+    "tagline": "A curated list of public projects, integrations, and discussions built on Jev — TypeSafe AI's System One model for typed decisions.",
+    "description": "A curated list of public projects, integrations, and discussions built on Jev — TypeSafe AI's System One model for typed decisions.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "yomiyasu",
+    "tagline": "AI生成の日本語を自然な日本語へ推敲するAgent Skill / Agent Skill for Refining AI-Generated Japanese into Natural Japanese",
+    "description": "AI生成の日本語を自然な日本語へ推敲するAgent Skill / Agent Skill for Refining AI-Generated Japanese into Natural Japanese",
+    "expected": "Writing",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "llm-master",
+    "tagline": "大模型（LLM）全栈学习路线与中文教程\uD83D\uDD25：覆盖 Prompt Engineering、RAG、AI Agent、MCP、微调、模型部署、Transformer、AI 编程与大厂面试，从入门到生产实践。",
+    "description": "大模型（LLM）全栈学习路线与中文教程\uD83D\uDD25：覆盖 Prompt Engineering、RAG、AI Agent、MCP、微调、模型部署、Transformer、AI 编程与大厂面试，从入门到生产实践。",
+    "expected": "Education",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "AnyJev",
+    "tagline": "Turn any LLM into a Jev-style decision model: typed decisions, real probabilities, no training. (continue updating, welcome any issue and PR request)",
+    "description": "Turn any LLM into a Jev-style decision model: typed decisions, real probabilities, no training. (continue updating, welcome any issue and PR request)",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Other"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "Index-Translate",
+    "tagline": "A Multilingual Translation Model Family",
+    "description": "A Multilingual Translation Model Family",
+    "expected": "Writing",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "dscode",
+    "tagline": "A DeepSeek coding agent harness: persistent shell, Ultra subagents, auto approval, Chrome MCP and session telemetry",
+    "description": "A DeepSeek coding agent harness: persistent shell, Ultra subagents, auto approval, Chrome MCP and session telemetry",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "easyread",
+    "tagline": "把英文论文读成舒服的中文：本地 PDF 论文翻译、原文对照、边读边问 AI、文献管理。Read English papers in comfortable Chinese.",
+    "description": "把英文论文读成舒服的中文：本地 PDF 论文翻译、原文对照、边读边问 AI、文献管理。Read English papers in comfortable Chinese.",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Writing",
+      "Education"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "jev-chat-windows",
+    "tagline": "JevChat-Windows：聊天窗口旁挂的回复辅助。窗口截图 + 本地离线 OCR 读对方消息 → Jev 判断意图 → 3 条候选一键填入，发送永远手动",
+    "description": "JevChat-Windows：聊天窗口旁挂的回复辅助。窗口截图 + 本地离线 OCR 读对方消息 → Jev 判断意图 → 3 条候选一键填入，发送永远手动",
+    "expected": "Chat & assistants",
+    "alsoOk": [
+      "Writing"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-jev-tools",
+    "tagline": "A curated list of tools  built for Jev — TypeSafe AI's System One model for typed decisions.",
+    "description": "A curated list of tools  built for Jev — TypeSafe AI's System One model for typed decisions.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "artex-ko",
+    "tagline": "ARTEX 한국어판 · AI 자율 침투 테스트 프레임워크 현지화 (upstream: Autumn-27/ARTEX, AGPL-3.0)",
+    "description": "ARTEX 한국어판 · AI 자율 침투 테스트 프레임워크 현지화 (upstream: Autumn-27/ARTEX, AGPL-3.0)",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Other"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "JevRev",
+    "tagline": "An LLM + Jev workflow that changes EVERYTHING. Boost your vertebrate brain with a spine inside. ",
+    "description": "An LLM + Jev workflow that changes EVERYTHING. Boost your vertebrate brain with a spine inside. ",
+    "expected": "Other",
+    "alsoOk": [
+      "Agents & automation",
+      "Productivity"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "EvoOntology",
+    "tagline": "EvoOntology: A Self-Evolving Ontology Layer for Data Agents ⚙️ EvoOntology插件为Claude Code/Codex 建立&进化本体层",
+    "description": "EvoOntology: A Self-Evolving Ontology Layer for Data Agents ⚙️ EvoOntology插件为Claude Code/Codex 建立&进化本体层",
+    "expected": "Data & analytics",
+    "alsoOk": [
+      "Coding",
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "ai-system-design",
+    "tagline": "AI System Design - Learn how to design AI systems built on LLMs, RAG, and AI Agents step by step.",
+    "description": "AI System Design - Learn how to design AI systems built on LLMs, RAG, and AI Agents step by step.",
+    "expected": "Education",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-decision-models",
+    "tagline": "A curated list of decision models (System One / typed decision models): hosted APIs, open-weight models, runtimes, SDKs, applications, benchmarks, and papers.",
+    "description": "A curated list of decision models (System One / typed decision models): hosted APIs, open-weight models, runtimes, SDKs, applications, benchmarks, and papers.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-jev",
+    "tagline": "1207 public resources for Jev, TypeSafe AI's System One decision model, indexed by decision pattern. Source citations, dated link checks and scheduled call-site text checks; runtime and performance are not independently tested here. EN/中文, JSON schema and platform compatibility.",
+    "description": "1207 public resources for Jev, TypeSafe AI's System One decision model, indexed by decision pattern. Source citations, dated link checks and scheduled call-site text checks; runtime and performance are not independently tested here. EN/中文, JSON schema and platform compatibility.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "Atria-Dawn-Preview",
+    "tagline": "",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-typesafe-jev",
+    "tagline": "Awesome Jev: a source-backed field guide to TypeSafe's System One model, with SDKs, live demos, agent tools, and independent evaluations.",
+    "description": "Awesome Jev: a source-backed field guide to TypeSafe's System One model, with SDKs, live demos, agent tools, and independent evaluations.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "whirl",
+    "tagline": "The AI chat app that sweats the details. Every top model, real memory, living documents, and your own tools.",
+    "description": "The AI chat app that sweats the details. Every top model, real memory, living documents, and your own tools.",
+    "expected": "Chat & assistants",
+    "alsoOk": []
+  },
+  {
+    "source": "GitHub",
+    "name": "blitzstrike",
+    "tagline": "Blitz Strike — a universal MCP security-audit toolbelt. Reconnaissance at speed. Analysis in depth. Validation before report.",
+    "description": "Blitz Strike — a universal MCP security-audit toolbelt. Reconnaissance at speed. Analysis in depth. Validation before report.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Other"
+    ]
+  },
+  {
+    "source": "GitHub",
+    "name": "awesome-jev-gallery",
+    "tagline": "\uD83D\uDD25\uD83D\uDD25 Awesome Jev:  open-source models, projects, benchmarks, and independent evaluations for Jev and System One models.",
+    "description": "\uD83D\uDD25\uD83D\uDD25 Awesome Jev:  open-source models, projects, benchmarks, and independent evaluations for Jev and System One models.",
+    "expected": "Other",
+    "alsoOk": [
+      "Research & search",
+      "Coding"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Edi Life OS",
+    "tagline": "self-hosted life dashboard with an MCP server for AI",
+    "description": "",
+    "expected": "Productivity",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "Free open source Adobe Lightroom alternative",
+    "tagline": "completely local with AI",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "Pocketty",
+    "tagline": "iPhone SSH terminal that pings you when an agent is blocked",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Productivity"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "DocFlare AI",
+    "tagline": "Open-source docs chatbot on Cloudflare's free tier",
+    "description": "",
+    "expected": "Chat & assistants",
+    "alsoOk": [
+      "Marketing & sales",
+      "Coding"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "AI SRE Arena",
+    "tagline": "an Open Benchmark for AI SRE Agents on Kubernetes",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Research & search"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Jevman",
+    "tagline": "AI decision models play Pac-Man",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "I Put an AI Agent on a Nokia 110",
+    "tagline": "",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Other",
+      "Chat & assistants"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Pacer",
+    "tagline": "will your AI coding subscription last until the reset?",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Productivity"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Terse",
+    "tagline": "a Claude Code plugin that halves reply length by cutting filler",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "Pinrail",
+    "tagline": "A desktop inbox where coding agents wait for your review",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Productivity",
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Agent.reviews",
+    "tagline": "Where AI agents read and write reviews on tools",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Other",
+      "Research & search"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "NanoMuse",
+    "tagline": "An open-source AI agent for your phone and computer",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Chat & assistants"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "An AI agent runs ten web errands a day",
+    "tagline": "every transcript published",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "OpenChart",
+    "tagline": "OSS TradingView alternative with your own AI agent",
+    "description": "",
+    "expected": "Data & analytics",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "Jotbus",
+    "tagline": "a shared encrypted scratchpad for coding agents",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "ChatGPT answers calls on a normal SIM. No Twilio",
+    "tagline": "just a $6 ESP32",
+    "description": "",
+    "expected": "Voice & audio",
+    "alsoOk": []
+  },
+  {
+    "source": "Hacker News",
+    "name": "Era",
+    "tagline": "Complete Simulated Companies for Your Agents",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Coding"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "AI search for every photo and every frame of video on macOS",
+    "tagline": "",
+    "description": "",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Image",
+      "Video"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Offrun",
+    "tagline": "manage every coding agent from one workspace",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Google Maps Scraper MCP",
+    "tagline": "",
+    "description": "",
+    "expected": "Data & analytics",
+    "alsoOk": [
+      "Coding",
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Made an open-source Lego AI generator",
+    "tagline": "",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": [
+      "Design",
+      "Other"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Pi pod",
+    "tagline": "Run your pi coding agent in sandboxes on your own server",
+    "description": "",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hacker News",
+    "name": "Bise",
+    "tagline": "a multi-agent harness, made for humans",
+    "description": "",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Coding"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Jev Decision Index",
+    "tagline": "Benchmarks and news on various repros of TypeSafe's Jev",
+    "description": "",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Other"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Qwen Image 2.1 Uncensored GGUF Studio",
+    "tagline": "Qwen-Image-2.1 Uncensored GGUF demo on ZeroGPU",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Model Pulse",
+    "tagline": "Hugging Face model download stats, history & trends",
+    "description": "",
+    "expected": "Data & analytics",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Qwen Image 2.1 Uncensored All-In-One LoRA Studio",
+    "tagline": "Uncensored Qwen 2.1 with All-In-One LoRAs",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "BFS Best Face Swap",
+    "tagline": "Head swap with the BFS LoRA on Qwen-Image-2.1 (+turbo)",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Viggle Turbo for Qwen-Image-2.1",
+    "tagline": "6-step Qwen-Image-2.1, T2I + editing, vs-base comparison",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "JEV-27B Live Demo",
+    "tagline": "Play Mario, Rubik's Cube and Tetris with JEV-27B",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "JEV-9B — typed decisions",
+    "tagline": "Calibrated typed decisions + System 2 reasoning",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": [
+      "Coding",
+      "Research & search"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "ChessFly",
+    "tagline": "Just a fruit fly's brain, playing chess",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Qwen-Image-2.1",
+    "tagline": "",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "KV Image to Clip",
+    "tagline": "Wan 2.2 image-to-clip with KV adapters",
+    "description": "",
+    "expected": "Video",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "MiniMax-H3 Character Swap LoRA",
+    "tagline": "Swap one character in a clip for a reference character",
+    "description": "",
+    "expected": "Video",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "FLUX.2 Klein Multi LoRA V2",
+    "tagline": "Experimental space for image editing with FLUX.2 Klein 9B",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Qwen Image 2.1 GGUF Studio",
+    "tagline": "Qwen Image 2.1 Uncensored GGUF demo with Q4_K_M weights",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "StepAudio 3 Music Studio",
+    "tagline": "Create songs, arrange vocals, and remix music with StepFun",
+    "description": "",
+    "expected": "Music",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "MiMo RL Environment Explorer",
+    "tagline": "Explore the MiMo-V2.6 RL environments and run rollouts",
+    "description": "",
+    "expected": "Research & search",
+    "alsoOk": [
+      "Coding",
+      "Other"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "AmphibiousRizz LoRA Browser",
+    "tagline": "Visual browser for amphibiousrizz's Krea 2 character LoRAs",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Qwen-Image 2.1 Move",
+    "tagline": "Move & resize objects with Qwen-Image 2.1 turbo, no LoRA",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": []
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Kev",
+    "tagline": "Typed questions in, calibrated probabilities out",
+    "description": "",
+    "expected": "Other",
+    "alsoOk": [
+      "Data & analytics",
+      "Coding"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Semantic Image Field",
+    "tagline": "Multimodal Jev (a.k.a. CLIP)",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": [
+      "Research & search",
+      "Other"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "Ming-Image 0.1 Design",
+    "tagline": "Text-to-image model for UI, infographics and poster design",
+    "description": "",
+    "expected": "Image",
+    "alsoOk": [
+      "Design"
+    ]
+  },
+  {
+    "source": "Hugging Face",
+    "name": "YuE2-3B Music Generator",
+    "tagline": "Generate songs and covers from style prompts and lyrics.",
+    "description": "",
+    "expected": "Music",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "NumaClaw",
+    "tagline": "Deploy AI agents and autonomous AI companies in one click",
+    "description": "NumaClaw sets up OpenClaw and Paperclip AI for you two of the best opensource projects for running AI agents without any of the setup. Pick from 250+ ready-to-use OpenClaw agents or 26 fully autonomous PaperclipAI companies, or build your own custom agents and teams. Pick your agents or a ready-made AI company, connect your accounts, and everything is installed, running and yours about a minute la",
+    "expected": "Agents & automation",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Coderblock",
+    "tagline": "Build full-stack web apps with your own AI team.",
+    "description": "Coderblock.ai lets anyone build production-ready full-stack web apps with a team of specialized AI employees. Autonomous agents and dynamic model selection use the right AI for each task, while ready-to-use templates help you launch faster and reduce AI costs.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Design"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Cekura Bench",
+    "tagline": "Speech-to-speech model benchmarks on live phone calls",
+    "description": "Cekura Bench publishes voice AI benchmarks you can verify. Our new speech-to-speech benchmark tests 9 realtime voice models, including GPT Realtime 2.1, Gemini Live, Grok and Phonic, as complete phone agents on live calls: 82 scenarios, three runs each. Models are ranked on reliability, data accuracy, stalled calls, response time and cost, and every call transcript is public. Cekura Bench also cov",
+    "expected": "Voice & audio",
+    "alsoOk": [
+      "Research & search"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Typeling",
+    "tagline": "Translate in your iPhone keyboard. Keep your tone.",
+    "description": "Stay in the conversation, even when the language changes. Typeling translates in your iPhone keyboard with tones for friends, partners, and business. Preview your translation, then tap to replace your text. Translate into six languages, or paste an incoming message to read it in yours. Start with 50 free translations; top up with in-app credits when needed.",
+    "expected": "Writing",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "aegis",
+    "tagline": "Smart personal safety app connected to 24/7 dispatch",
+    "description": "Aegis replaces friction-heavy panic buttons with an intelligent personal safety shield. When triggered, it links directly to 24/7 emergency dispatch while sharing a live context payload (real-time GPS, reason for alert, streaming audio/video, and vital health data) so responders never arrive blind. Built for everyday safety, it features Athena AI anomaly detection, fall detection, adaptive accessi",
+    "expected": "Other",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "SineFrame M3",
+    "tagline": "Test MCP servers and the agents that call them in pytest",
+    "description": "Your MCP unit tests pass, but did the agent call the tool? M3 runs your server through real Claude Code, Codex, OpenCode or Pi and asserts on the calls they actually made, in plain pytest. Direct tests need no API key. m3 ui shows every trace and tool call; m3 ci test --upload gates PRs and keeps runs on app.m3.sineframe.com. Open source, Apache-2.0.",
+    "expected": "Coding",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Polylane for Vercel",
+    "tagline": "An AI on-call engineer for your Vercel apps",
+    "description": "Keep shipping while Polylane watches your Vercel apps. Connect through the Vercel Marketplace to bring projects, deployments, domains and logs into one live graph. Agents catch regressions, investigate the root cause with evidence, and open a pull request with the permanent fix for your review.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Strac Comply",
+    "tagline": "Get SOC 2 without the sales call",
+    "description": "1. Self-serve compliance automation. Sign up, connect AWS, Google Workspace, Okta, GitHub and Slack, and 100+ tests run continuously for SOC 2, ISO 27001, HIPAA, PCI DSS and more. 2. No per-framework fees 3. 14-day free trial, no credit card 4. Built by a data-security company, so it also finds the AI apps and agents in your workspace and maps them to the customer data they can reach 5. Run it fro",
+    "expected": "Other",
+    "alsoOk": [
+      "Agents & automation",
+      "Productivity"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Semwright",
+    "tagline": "Give AI agents structured access to real software",
+    "description": "Semwright is an open-source Rust runtime for AI agents working with desktop and professional software. Through structured drivers, agents can interact with application objects and project data, while a shared runtime handles permissions, execution, dependencies, artifact handoffs, and verification. It supports MCP without being limited to a single protocol, model, or agent. Build workflows across ",
+    "expected": "Agents & automation",
+    "alsoOk": [
+      "Coding"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Epilude Narrator",
+    "tagline": "Listen to any article, doc or text on your Mac",
+    "description": "Narrator reads selected text, documents, web pages, and images aloud on your Mac. Choose an on-device or cloud voice and follow every word.",
+    "expected": "Voice & audio",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "NOVA CLI v1.0",
+    "tagline": "AI developer in your terminal",
+    "description": "Nova CLI is an AI teammate in your terminal. Describe what you want in plain words and Nova reads your project, makes the change, runs your own tests and build, fixes what it broke, and gives you an honest verdict on what it checked. 160+ AI models are included on paid plans, with no separate AI account or API keys to manage. It works with the tests and tooling you already have, so there is nothin",
+    "expected": "Coding",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Claude for Google Workspace",
+    "tagline": "Bring Claude directly into Google Docs, Sheets & Slides",
+    "description": "Claude now works directly inside Google Docs, Sheets, and Slides. Ask it to draft and edit documents, analyze spreadsheets, write formulas, build charts, or create presentation slides — all without leaving your file. You can also create and edit Google Workspace files directly from Claude using the new connectors. No more copying and pasting between apps. Available in beta for all paid Claude plan",
+    "expected": "Productivity",
+    "alsoOk": [
+      "Writing",
+      "Data & analytics"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Tonefold",
+    "tagline": "Describe a song, get every part as editable MIDI",
+    "description": "Tonefold is a free, open-source AI music composer for macOS and Windows. Describe a song to Claude, get chords, melody, bass and drums in a piano roll you can edit note by note, then export MIDI, WAV and stems.",
+    "expected": "Music",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Claude Haiku 5.5",
+    "tagline": "Anthropic's fastest and most capable Haiku yet",
+    "description": "Claude Haiku 5.5 is Anthropic's fastest and most capable small model, built for high-volume, cost-sensitive tasks like summarization, classification, coding subagents, customer support, and browser use.",
+    "expected": "Chat & assistants",
+    "alsoOk": [
+      "Coding",
+      "Other"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "judged.systems",
+    "tagline": "The judgment API platform for support systems.",
+    "description": "Support systems call judged.systems when a ticket needs a judgment. The helpdesk stays the system of record. You send the ticket. A pack defines the questions: queue, urgency, refund request, policy risk. Back comes a choice and its probabilities, a score on a rubric, or the probability a statement is true. Your thresholds return accept or review. A failed call stays in review. The ticket is redac",
+    "expected": "Marketing & sales",
+    "alsoOk": [
+      "Coding",
+      "Data & analytics"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "OpenSwarm",
+    "tagline": "A swarm of agents, in the same place you work",
+    "description": "Stop bolting AI onto your computer. OpenSwarm is an AI-first operating system where agents run the whole machine: apps create themselves, browsers control themselves, and swarms of agents work together. Your OS just became an infinite canvas, and your work just transformed from you doing one task at a time, to orchestrating dozens in parallel. Tell it what you want and a swarm of agents does the w",
+    "expected": "Agents & automation",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "ClawCall",
+    "tagline": "Your AI agent's phone to dial, hold, and reports back",
+    "description": "ClawCall makes real phone calls for you, from the AI you already use. Ask ChatGPT, Claude or a Grok bot to cancel a gym membership, get quotes from repair shops, or sit on hold with your insurer. It dials, works the phone tree, waits on hold, talks to whoever answers, and brings back what was said. When a decision needs you, it rings you first and connects you if you say yes like a real assistant.",
+    "expected": "Voice & audio",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Side",
+    "tagline": "A little AI chat panel that lives beside your Mac's Dock",
+    "description": "Side is a tiny AI chat panel that sits right beside your Mac's Dock: one glance away, never in the way. • Fits the gap next to your Dock, floats above other windows, works across Spaces and full-screen apps • Switch providers, models and reasoning levels in one conversation • Bring your own account: sign in with ChatGPT or use an API key • Compact composer that expands to full height when needed •",
+    "expected": "Chat & assistants",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Clippo",
+    "tagline": "Orchestrate AI agent teams on a visual canvas",
+    "description": "Stop drowning in terminal tabs. Clippo turns your software development into a visual command room on Windows. On an infinite canvas, connect agents like Claude Code, OpenCode, Codex, CommandCode, Antigravity CLI, Kiro... simply by linking nodes to watch them code in parallel. Get on device memory to save tokens, native speed, and complete privacy with zero cloud or logins. Step up as tech lead of ",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Hark",
+    "tagline": "The personal AI that handles life before you have to",
+    "description": "Hark Pro is a personal AI designed to take things off your plate, not add another chatbot to your day. It remembers what matters, thinks ahead about what you might need, and uses its own cloud computer to get things done across the web — from managing calendars and email to shopping, travel, bills, and everyday errands. Your sensitive credentials stay encrypted, Hark never sells your data or share",
+    "expected": "Chat & assistants",
+    "alsoOk": [
+      "Agents & automation",
+      "Productivity"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Liquid Inference",
+    "tagline": "LLM router where providers compete for every prompt",
+    "description": "* Fully compatible with agentic coding tools: Claude Code, Codex, OpenCode, Cursor, Pi, Cline, and many more. Full multi-modal support. * Hundreds of open- and closed-weight models. Create routing rule presets or use our Auto routing algorithms. * Providers compete dynamically on price for every prompt, offering the lowest marginal cost. * Sign up for free with email, first 500 users get $20 of fr",
+    "expected": "Coding",
+    "alsoOk": [
+      "Other"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "AgentGuard",
+    "tagline": "Scan AI agent Skills for risks before you install them",
+    "description": "AgentGuard scans AI agent SKILL.md files for security risks, hidden capabilities, and quality issues before you install them. Paste a Skill, get a Trust Report with scores, findings, and a clear verdict. Free to use — no account required.",
+    "expected": "Coding",
+    "alsoOk": [
+      "Agents & automation",
+      "Other"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Hallmonitor",
+    "tagline": "See and answer every coding agent from your notch",
+    "description": "See every Claude Code and Codex session on your Mac and your servers, live: in the notch, menu bar, a native app and the terminal. Know who's done, who's stuck, and answer their questions right from the notch. Free and open source",
+    "expected": "Coding",
+    "alsoOk": [
+      "Productivity"
+    ]
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Moonwalkers Dusk",
+    "tagline": "Strap-on motorized wheels that let you walk twice as fast",
+    "description": "Discover Moonwalkers Dusk electric shoes by Shift Robotics. Our lightest robotic shoes yet, with three sizes, three finishes, and speeds up to 7 mph.",
+    "expected": "Other",
+    "alsoOk": []
+  },
+  {
+    "source": "Product Hunt",
+    "name": "Simo",
+    "tagline": "The judgment layer for software that acts",
+    "description": "Simo is the System 1.5 judgment model from Temprl Labs. Ask typed questions about text, screenshots, or video and get calibrated probabilities and the values needed to act, in milliseconds.",
+    "expected": "Other",
+    "alsoOk": [
+      "Coding",
+      "Data & analytics"
+    ]
+  }
+]

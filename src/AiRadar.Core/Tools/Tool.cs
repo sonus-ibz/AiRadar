@@ -21,6 +21,11 @@ public sealed class Tool
     public string? UrlKey { get; set; }
     public string? WebsiteKey { get; set; }
 
+    /// <summary>What the tool is good at; names come from <see cref="Categories.ToolCategories"/>.</summary>
+    public string? PrimaryCategory { get; set; }
+    public string? SecondaryCategory { get; set; }
+    public Categories.CategoryMethod? CategoryMethod { get; set; }
+
     /// <summary>Set when this tool was already found on another source earlier.</summary>
     public int? DuplicateOfId { get; set; }
     public Tool? DuplicateOf { get; set; }

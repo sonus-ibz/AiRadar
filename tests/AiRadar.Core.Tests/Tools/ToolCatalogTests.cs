@@ -1,5 +1,6 @@
 using AiRadar.Core.Tests.TestSupport;
 using AiRadar.Core.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace AiRadar.Core.Tests.Tools;
 
@@ -114,6 +115,55 @@ public sealed class ToolCatalogTests : IDisposable
 
         await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
             new ToolCatalog(db).GetLatestAsync(ProductHuntOnly, skip, take, CancellationToken.None));
+    }
+
+    [Fact]
+    public async Task GetLatestAsync_CategoryFilter_MatchesPrimaryOrSecondary()
+    {
+        await SetCategoriesAsync(await AddAsync("video-first", 1), "Video", null);
+        await SetCategoriesAsync(await AddAsync("video-second", 2), "Marketing & sales", "Video");
+        await SetCategoriesAsync(await AddAsync("coding", 3), "Coding", null);
+
+        var items = await NamesAsync(ProductHuntOnly with { Category = "Video" });
+
+        Assert.Equal(["Tool video-second", "Tool video-first"], items);
+    }
+
+    [Fact]
+    public async Task GetLatestAsync_ReturnsCategories()
+    {
+        await SetCategoriesAsync(await AddAsync("a", 1), "Video", "Marketing & sales");
+        await using var db = _database.CreateContext();
+
+        var item = Assert.Single(await new ToolCatalog(db).GetLatestAsync(ProductHuntOnly, 0, 10, CancellationToken.None));
+
+        Assert.Equal(("Video", "Marketing & sales"), (item.PrimaryCategory, item.SecondaryCategory));
+    }
+
+    [Fact]
+    public async Task CountByCategoryAsync_CountsPrimaryAndSecondaryWithinFeedAndMinimums()
+    {
+        await SetCategoriesAsync(await AddAsync("a", 1, score: 50), "Video", "Marketing & sales");
+        await SetCategoriesAsync(await AddAsync("b", 2, score: 50), "Video", null);
+        await SetCategoriesAsync(await AddAsync("hidden", 3, score: 1), "Video", null);
+        await SetCategoriesAsync(await AddAsync("other-feed", 4, source: "GitHub", score: 999), "Video", null);
+        await using var db = _database.CreateContext();
+        var filter = new ToolFilter(new Dictionary<string, int> { ["Product Hunt"] = 10 });
+
+        var counts = await new ToolCatalog(db).CountByCategoryAsync(filter, CancellationToken.None);
+
+        Assert.Equal(2, counts["Video"]);
+        Assert.Equal(1, counts["Marketing & sales"]);
+        Assert.Equal(2, counts.Count);
+    }
+
+    private async Task SetCategoriesAsync(Tool tool, string primary, string? secondary)
+    {
+        await using var db = _database.CreateContext();
+        var saved = await db.Tools.SingleAsync(t => t.Id == tool.Id);
+        saved.PrimaryCategory = primary;
+        saved.SecondaryCategory = secondary;
+        await db.SaveChangesAsync();
     }
 
     [Fact]

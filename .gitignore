@@ -480,3 +480,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Output of the local accuracy run (eval/AiRadar.Eval)
+eval/last-run.txt
